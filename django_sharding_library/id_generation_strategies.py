@@ -33,9 +33,7 @@ class TableStrategy(BaseIDGenerationStrategy):
         Returns a new unique integer identifier for an object using an
         auto-incrimenting field in the database.
         """
-        app_label = self.backing_model_name.split('.')[0]
-        app = apps.get_app_config(app_label)
-        backing_model = app.get_model(self.backing_model_name[len(app_label) + 1:])
+        backing_model = self.backing_model_name
 
         if not issubclass(backing_model, TableStrategyModel):
             raise ValueError("Unsupported model used for generating IDs")
